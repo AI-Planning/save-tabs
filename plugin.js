@@ -1,14 +1,4 @@
 
-
-function save_tab_contents () {
-    // Coming soon...
-    return { };
-}
-
-function load_tab_contents (contents) {
-    // Coming soon...
-}
-
 /********************************************************************/
 
 define(function () {
@@ -25,11 +15,22 @@ define(function () {
         disable: function() { /* Do Nothing */ },
 
         save: function() {
-            return save_tab_contents();
+            var contents = {};
+
+            $('.editor').each(function() {
+                var fname = $('#tab-' + this.id).text();
+                var fcontent = window.ace.edit(this.id).getSession().getValue();
+                contents[fname] = fcontent;
+            });
+
+            return contents;
         },
 
         load: function(settings) {
-            load_tab_contents(settings);
+            for (var fname in settings) {
+                createEditor(settings[fname]);
+                renamePddl(fname);
+            }
         }
 
     };
