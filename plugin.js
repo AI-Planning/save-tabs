@@ -27,6 +27,14 @@ define(function () {
         },
 
         load: function(settings) {
+
+            // First nix all of the existing tabs if there is content to load
+            if (!($.isEmptyObject(settings))) {
+                while ($('.pddl-tab').length > 0)
+                    closeDocument();
+            }
+
+            // Next, load all of the saved tabs
             for (var fname in settings) {
                 createEditor(settings[fname]);
                 renamePddl(fname);
