@@ -30,9 +30,12 @@ define(function () {
 
             // First nix all of the existing tabs if there is content to load
             if (!($.isEmptyObject(settings))) {
+                console.log("Flushing out the existing tabs...");
                 while ($('.pddl-tab').length > 0)
                     closeDocument();
-            }
+            } else console.log("Keeping the existing tabs...");
+
+            console.log(settings);
 
             // Next, load all of the saved tabs
             for (var fname in settings) {
