@@ -19,8 +19,10 @@ define(function () {
 
             $('.editor').each(function() {
                 var fname = $('#tab-' + this.id).text();
-                var fcontent = window.ace.edit(this.id).getSession().getValue();
-                contents[fname] = fcontent;
+                if ($('#' + this.id + '.ace_editor').length) {
+                    var fcontent = window.ace.edit(this.id).getSession().getValue();
+                    contents[fname] = fcontent;
+                }
             });
 
             return contents;
